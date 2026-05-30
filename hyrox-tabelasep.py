@@ -61,6 +61,7 @@ while True:
     print("========== HYROOX PLANNER ==========")
     print("1 - CRUD de Treinos")
     print("2 - Exercícios e Controle de Desempenho")
+    print("3 - Planejamento de Competições")
     print("0 - Sair")
     print()
     try:
@@ -227,10 +228,32 @@ while True:
             elif escolha2 == 1:
                 os.system("cls")
 
-                print("Opções: sled push, sled pull, burpee broad jumps")
-                print("wall balls, farmer’s carry\n")
+                print("=================================================")
+                print("Opções:\n"
+                        "1- sled push\n"
+                        "2- sled pull\n"
+                        "3- burpee broad jumps\n"
+                        "4- wall balls\n"
+                        "5- farmer’s carry\n")
+                print("=================================================")
 
-                exercicio = input("Digite o exercício: ")
+                opcoes_exercicios = ["sled push", "sled pull", "burpee broad jumps", "wall balls", "farmer’s carry"]
+
+                try:
+                    numero_escolhido= int(input("Digite o n° do exercício: "))
+
+                    if 1 <= numero_escolhido <= len(opcoes_exercicios):
+                        exercicio_nome = opcoes_exercicios[numero_escolhido - 1]
+                    else:
+                        print("\n Opção inválida! Escolha um número de 1 a 5.")
+                        input("Pressione Enter e tente novamente...")
+                        continue
+                except ValueError:
+                    print("\n Opção inválida! Digite apenas números.")
+                    input("Pressione Enter e tente novamente...")
+                    continue
+
+
                 tempo = input("Digite o tempo: ")
                 distancia = input("Digite a distância: ")
                 carga = input("Digite a carga: ")
@@ -241,7 +264,7 @@ while True:
                 duracoes.append("")
                 intensidades.append("")
 
-                exercicios.append(exercicio)
+                exercicios.append(exercicio_nome)
                 tempos.append(tempo)
                 distancias.append(distancia)
                 cargas.append(carga)
@@ -338,6 +361,22 @@ while True:
             else:
                 print("Opção inválida.")
                 input("Pressione Enter para continuar...")
+    elif desejo == 3:
+        while True:
+            os.system("cls")
+            print("===== EM CONSTRUÇÃO =====")
+            print("0 - Voltar")
+            print()
+            try:
+                escolha2 = int(input("Escolha uma opção: "))
+            except ValueError:
+                print("Digite apenas números.")
+                input("Pressione Enter...")
+                continue
+            if escolha2 == 0:
+                break
+
     else:
         print("Opção inválida.")
         input("Pressione Enter para continuar...")
+        
