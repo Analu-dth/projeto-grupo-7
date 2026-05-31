@@ -1,4 +1,5 @@
 import os
+from datetime import datetime, date
 
 ARQUIVO_DADOS = "hyroox_planner_dados.txt"
 
@@ -13,16 +14,22 @@ distancias = []
 cargas = []
 repeticoes = []
 
+competicoes = []
+locais = []
+datas = []
+categorias = []
+
 
 def carregar_dados():
     global treinos, horarios, duracoes, intensidades
     global exercicios, tempos, distancias, cargas, repeticoes
+    global competicoes, locais, datas, categorias
 
     if os.path.exists(ARQUIVO_DADOS):
         with open(ARQUIVO_DADOS, "r", encoding="utf-8") as f:
             linhas = f.readlines()
 
-            if len(linhas) >= 9:
+            if len(linhas) >= 13:
                 treinos = linhas[0].strip().split(",") if linhas[0].strip() else []
                 horarios = linhas[1].strip().split(",") if linhas[1].strip() else []
                 duracoes = linhas[2].strip().split(",") if linhas[2].strip() else []
@@ -33,6 +40,11 @@ def carregar_dados():
                 distancias = linhas[6].strip().split(",") if linhas[6].strip() else []
                 cargas = linhas[7].strip().split(",") if linhas[7].strip() else []
                 repeticoes = linhas[8].strip().split(",") if linhas[8].strip() else []
+
+                competicoes = linhas[9].strip().split(",") if linhas[9].strip() else []
+                locais = linhas[10].strip().split(",") if linhas[10].strip() else []
+                datas = linhas[11].strip().split(",") if linhas[11].strip() else []
+                categorias = linhas[12].strip().split(",") if linhas[12].strip() else []
 
             else:
                 print("Arquivo incompleto. Iniciando listas vazias.")
@@ -53,6 +65,11 @@ def salvar_dados():
         f.write(",".join(cargas) + "\n")
         f.write(",".join(repeticoes) + "\n")
 
+        f.write(",".join(competicoes) + "\n")
+        f.write(",".join(locais) + "\n")
+        f.write(",".join(datas) + "\n")
+        f.write(",".join(categorias) + "\n")
+
 
 carregar_dados()
 
@@ -67,7 +84,7 @@ while True:
     try:
         desejo = int(input("Selecione a opção desejada: "))
     except ValueError:
-        print("Entrada inválida.")
+        print("Entrada inválida. Por favor, digite um NÚMERO.")
         input("Pressione Enter para continuar...")
         continue
     if desejo == 0:
@@ -88,7 +105,7 @@ while True:
             try:
                 escolha1 = int(input("Escolha uma opção: "))
             except ValueError:
-                print("Digite apenas números.")
+                print("Entrada inválida. Por favor, digite um NÚMERO.")
                 input("Pressione Enter...")
                 continue
             if escolha1 == 0:
@@ -170,7 +187,7 @@ while True:
                     else:
                         print("Número inválido.")
                 except ValueError:
-                    print("Digite apenas números.")
+                    print("Entrada inválida. Por favor, digite um NÚMERO.")
                 input("Pressione Enter para continuar...")
 
             elif escolha1 == 4:
@@ -200,7 +217,7 @@ while True:
                     else:
                         print("Número inválido.")
                 except ValueError:
-                    print("Digite apenas números.")
+                    print("Entrada inválida. Por favor, digite um NÚMERO.")
                 input("Pressione Enter para continuar...")
             else:
                 print("Opção inválida.")
@@ -219,7 +236,7 @@ while True:
             try:
                 escolha2 = int(input("Escolha uma opção: "))
             except ValueError:
-                print("Digite apenas números.")
+                print("Entrada inválida. Por favor, digite um NÚMERO.")
                 input("Pressione Enter...")
                 continue
             if escolha2 == 0:
@@ -249,7 +266,7 @@ while True:
                         input("Pressione Enter e tente novamente...")
                         continue
                 except ValueError:
-                    print("\n Opção inválida! Digite apenas números.")
+                    print("\n Entrada inválida! Por favor, digite um NÚMERO.")
                     input("Pressione Enter e tente novamente...")
                     continue
 
@@ -329,7 +346,7 @@ while True:
                     else:
                         print("Número inválido.")
                 except ValueError:
-                    print("Digite apenas números.")
+                    print("Entrada inválida. Por favor, digite um NÚMERO.")
                 input("Pressione Enter para continuar...")
             elif escolha2 == 4:
                 os.system("cls")
@@ -356,7 +373,7 @@ while True:
                     else:
                         print("Número inválido.")
                 except ValueError:
-                    print("Digite apenas números.")
+                    print("Entrada inválida. Por favor, digite um NÚMERO.")
                 input("Pressione Enter para continuar...")
             else:
                 print("Opção inválida.")
@@ -365,18 +382,95 @@ while True:
         while True:
             os.system("cls")
             print("===== EM CONSTRUÇÃO =====")
+            print("1 - Cadastrar Competição")
+            print("2 - Visualizar Competição")
             print("0 - Voltar")
             print()
             try:
-                escolha2 = int(input("Escolha uma opção: "))
+                escolha3 = int(input("Escolha uma opção: "))
             except ValueError:
-                print("Digite apenas números.")
+                print("Entrada inválida. Por favor, digite um NÚMERO.")
                 input("Pressione Enter...")
                 continue
-            if escolha2 == 0:
+            if escolha3 == 0:
                 break
+            elif escolha3 == 1:
+                os.system("cls")
+
+                competicao = input("Informe o nome da Competição: ")
+                
+                while True:
+                    data_str = input("Informe a Data desta Competição (DD/MM/AAAA): ")
+                    try:
+                        datetime.strptime(data_str, "%d/%m/%Y").date()
+                        break
+                    except ValueError:
+                        print("Formato de data inválido. Por Favor, use DD/MM/AAAA.")
+
+                local = input("Informe o Local da Competição: ")
+                categoria = input("Informe a categoria da Competição: ")
+
+                competicoes.append(competicao)
+                datas.append(data_str)
+                locais.append(local)
+                categorias.append(categoria)
+
+                competicoes.append("")
+                datas.append("")
+                locais.append("")
+                categorias.append("")
+                salvar_dados()
+                print("\n✓ Competição adicionada com sucesso!")
+                input("Pressione Enter para continuar...")
+            elif escolha3 == 2:
+                os.system("cls")
+                print("========== COMPETIÇÕES CADASTRADAS ==========\n")
+                if not any(e for e in competicoes if e):
+                    print("Nenhuma competição cadastrada.")
+                else:
+                    col1, col2, col3, col4, col5 = 22, 12, 32, 32, 18
+                    sep = (
+                        f"+{'-'*col1}+{'-'*col2}+{'-'*col3}+"
+                        f"{'-'*col4}+{'-'*col5}+"
+                    )
+                    print(sep)
+                    print(
+                        f"| {'Competição':<{col1-2}} "
+                        f"| {'Data':<{col2-2}} "
+                        f"| {'Local':<{col3-2}} "
+                        f"| {'Categoria':<{col4-2}} "
+                        f"| {'Dias Restantes':<{col5-2}} |"
+                    )
+                    print(sep)
+
+                    hoje = date.today()
+                    
+                    for i in range(len(competicoes)):
+                        if competicoes[i]:
+                            dias_restantes_str = "N/A"
+                            try:
+                                data_competicao = datetime.strptime(datas[i], "%d/%m/%Y").date()
+                                diferenca = data_competicao - hoje
+                                dias_restantes = diferenca.days
+
+                                if dias_restantes > 0:
+                                    dias_restantes_str = f"{dias_restantes} dias"
+                                elif dias_restantes == 0:
+                                    dias_restantes_str = "HOJE!"
+                                else:
+                                    dias_restantes_str = f"Há {-dias_restantes} dias"
+                            except ValueError:
+                                dias_restantes_str = "Data Inválioda"
+                            print(
+                                f"| {competicoes[i]:<{col1-2}} "
+                                f"| {datas[i]:<{col2-2}} "
+                                f"| {locais[i]:<{col3-2}} "
+                                f"| {categorias[i]:<{col4-2}} "
+                                f"| {dias_restantes_str:<{col5-2}} |"
+                            )
+                    print(sep)
+                input("\nPressione Enter para continuar...")
 
     else:
-        print("Opção inválida.")
+        print("Opção inválida. Por favor, digite um NÚMERO.")
         input("Pressione Enter para continuar...")
-        
