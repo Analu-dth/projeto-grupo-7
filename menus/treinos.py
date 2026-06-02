@@ -40,7 +40,7 @@ def adicionar_treino():
         os.system("cls")
 
         treino     = input("Digite o nome do treino: ")
-        duracao    = input("Digite a duração: ")
+        duracao    = input("Digite a duração (Minutos): ")
         horario    = input("Digite o horário: ")
         intensidade = input("Digite a intensidade: ")
 
