@@ -1,9 +1,9 @@
 import os
 import csv
 
-ARQ_TREINOS      = "treinos.csv"
-ARQ_EXERCICIOS   = "exercicios.csv"
-ARQ_COMPETICOES  = "competicoes.csv"
+ARQ_TREINOS      = "arquivos/treinos.csv"
+ARQ_EXERCICIOS   = "arquivos/exercicios.csv"
+ARQ_COMPETICOES  = "arquivos/competicoes.csv"
 
 treinos      = []
 horarios     = []

@@ -36,28 +36,29 @@ def menu_treinos():
 
 
 def adicionar_treino():
-    os.system("cls")
+    while True:
+        os.system("cls")
 
-    treino     = input("Digite o nome do treino: ")
-    duracao    = input("Digite a duração: ")
-    horario    = input("Digite o horário: ")
-    intensidade = input("Digite a intensidade: ")
+        treino     = input("Digite o nome do treino: ")
+        duracao    = input("Digite a duração: ")
+        horario    = input("Digite o horário: ")
+        intensidade = input("Digite a intensidade: ")
 
-    dados.treinos.append(treino)
-    dados.duracoes.append(duracao)
-    dados.horarios.append(horario)
-    dados.intensidades.append(intensidade)
+        dados.treinos.append(treino)
+        dados.duracoes.append(duracao)
+        dados.horarios.append(horario)
+        dados.intensidades.append(intensidade)
 
-    # Entradas vazias para manter alinhamento com exercícios
-    dados.exercicios.append("")
-    dados.tempos.append("")
-    dados.distancias.append("")
-    dados.cargas.append("")
-    dados.repeticoes.append("")
+        # Entradas vazias para manter alinhamento com exercícios
+        dados.exercicios.append("")
+        dados.tempos.append("")
+        dados.distancias.append("")
+        dados.cargas.append("")
+        dados.repeticoes.append("")
 
-    salvar_dados()
-    print("\n✓ Treino adicionado com sucesso!")
-    input("Pressione Enter para continuar...")
+        salvar_dados()
+        print("\n✓ Treino adicionado com sucesso!")
+        input("Pressione Enter para continuar...")
 
 
 def visualizar_treinos():
@@ -93,62 +94,68 @@ def visualizar_treinos():
 
 
 def editar_treino():
-    os.system("cls")
-    treinos_validos = [i for i, t in enumerate(dados.treinos) if t]
+    while True:
+        os.system("cls")
+        treinos_validos = [i for i, t in enumerate(dados.treinos) if t]
 
-    if not treinos_validos:
-        print("Nenhum treino cadastrado.")
-        input("Pressione Enter...")
-        return
+        if not treinos_validos:
+            print("Nenhum treino cadastrado.")
+            input("Pressione Enter...")
+            return
 
-    print("========== EDITAR TREINOS ==========\n")
-    for idx, i in enumerate(treinos_validos):
-        print(f"{idx + 1} - {dados.treinos[i]}")
+        print("========== EDITAR TREINOS ==========\n")
+        for idx, i in enumerate(treinos_validos):
+            print(f"{idx + 1} - {dados.treinos[i]}")
 
-    try:
-        selecao = int(input("\nEscolha o treino: ")) - 1
-        if 0 <= selecao < len(treinos_validos):
-            n = treinos_validos[selecao]
-            dados.treinos[n]      = input(f"Novo nome ({dados.treinos[n]}): ")      or dados.treinos[n]
-            dados.duracoes[n]     = input(f"Nova duração ({dados.duracoes[n]}): ")  or dados.duracoes[n]
-            dados.horarios[n]     = input(f"Novo horário ({dados.horarios[n]}): ")  or dados.horarios[n]
-            dados.intensidades[n] = input(f"Nova intensidade ({dados.intensidades[n]}): ") or dados.intensidades[n]
-            salvar_dados()
-            print("\n✓ Treino editado!")
-        else:
-            print("Número inválido.")
-    except ValueError:
-        print("Entrada inválida. Por favor, digite um NÚMERO.")
+        try:
+            selecao = int(input("\nEscolha o treino: ")) - 1
+            if 0 <= selecao < len(treinos_validos):
+                n = treinos_validos[selecao]
+                dados.treinos[n]      = input(f"Novo nome ({dados.treinos[n]}): ")      or dados.treinos[n]
+                dados.duracoes[n]     = input(f"Nova duração ({dados.duracoes[n]}): ")  or dados.duracoes[n]
+                dados.horarios[n]     = input(f"Novo horário ({dados.horarios[n]}): ")  or dados.horarios[n]
+                dados.intensidades[n] = input(f"Nova intensidade ({dados.intensidades[n]}): ") or dados.intensidades[n]
+                salvar_dados()
+                print("\n✓ Treino editado!")
+                input("Pressione Enter para concluir...")
+                break
+            else:
+                print("Número inválido.")
+        except ValueError:
+            print("Entrada inválida. Por favor, digite um NÚMERO.")
 
-    input("Pressione Enter para continuar...")
+        input("Pressione Enter para continuar...")
 
 
 def excluir_treino():
-    os.system("cls")
-    treinos_validos = [i for i, t in enumerate(dados.treinos) if t]
+    while True:
+        os.system("cls")
+        treinos_validos = [i for i, t in enumerate(dados.treinos) if t]
 
-    if not treinos_validos:
-        print("Nenhum treino cadastrado.")
-        input("Pressione Enter...")
-        return
+        if not treinos_validos:
+            print("Nenhum treino cadastrado.")
+            input("Pressione Enter...")
+            return
 
-    print("========== EXCLUIR TREINOS ==========\n")
-    for idx, i in enumerate(treinos_validos):
-        print(f"{idx + 1} - {dados.treinos[i]}")
+        print("========== EXCLUIR TREINOS ==========\n")
+        for idx, i in enumerate(treinos_validos):
+            print(f"{idx + 1} - {dados.treinos[i]}")
 
-    try:
-        selecao = int(input("\nEscolha o treino: ")) - 1
-        if 0 <= selecao < len(treinos_validos):
-            n = treinos_validos[selecao]
-            dados.treinos[n]      = ""
-            dados.horarios[n]     = ""
-            dados.duracoes[n]     = ""
-            dados.intensidades[n] = ""
-            salvar_dados()
-            print("\n✓ Treino excluído!")
-        else:
-            print("Número inválido.")
-    except ValueError:
-        print("Entrada inválida. Por favor, digite um NÚMERO.")
+        try:
+            selecao = int(input("\nEscolha o treino: ")) - 1
+            if 0 <= selecao < len(treinos_validos):
+                n = treinos_validos[selecao]
+                dados.treinos[n]      = ""
+                dados.horarios[n]     = ""
+                dados.duracoes[n]     = ""
+                dados.intensidades[n] = ""
+                salvar_dados()
+                print("\n✓ Treino excluído!")
+                input("Pressione Enter para continuar...")
+                break
+            else:
+                print("Número inválido.")
+        except ValueError:
+            print("Entrada inválida. Por favor, digite um NÚMERO.")
 
-    input("Pressione Enter para continuar...")
+        input("Pressione Enter para continuar...")

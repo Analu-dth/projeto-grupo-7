@@ -121,35 +121,38 @@ def visualizar_exercicios():
 
 
 def editar_exercicio():
-    os.system("cls")
-    exercicios_validos = [i for i, e in enumerate(dados.exercicios) if e]
+    while True:
+        os.system("cls")
+        exercicios_validos = [i for i, e in enumerate(dados.exercicios) if e]
 
-    if not exercicios_validos:
-        print("Nenhum exercício cadastrado.")
-        input("Pressione Enter...")
-        return
+        if not exercicios_validos:
+            print("Nenhum exercício cadastrado.")
+            input("Pressione Enter...")
+            return
 
-    print("========== EDITAR EXERCÍCIOS ==========\n")
-    for idx, i in enumerate(exercicios_validos):
-        print(f"{idx + 1} - {dados.exercicios[i]}")
+        print("========== EDITAR EXERCÍCIOS ==========\n")
+        for idx, i in enumerate(exercicios_validos):
+            print(f"{idx + 1} - {dados.exercicios[i]}")
 
-    try:
-        selecao = int(input("\nEscolha o exercício: ")) - 1
-        if 0 <= selecao < len(exercicios_validos):
-            n = exercicios_validos[selecao]
-            dados.exercicios[n]  = input(f"Novo exercício ({dados.exercicios[n]}): ")  or dados.exercicios[n]
-            dados.tempos[n]      = input(f"Novo tempo ({dados.tempos[n]}): ")           or dados.tempos[n]
-            dados.distancias[n]  = input(f"Nova distância ({dados.distancias[n]}): ")  or dados.distancias[n]
-            dados.cargas[n]      = input(f"Nova carga ({dados.cargas[n]}): ")           or dados.cargas[n]
-            dados.repeticoes[n]  = input(f"Novas repetições ({dados.repeticoes[n]}): ") or dados.repeticoes[n]
-            salvar_dados()
-            print("\n✓ Exercício editado!")
-        else:
-            print("Número inválido.")
-    except ValueError:
-        print("Entrada inválida. Por favor, digite um NÚMERO.")
+        try:
+            selecao = int(input("\nEscolha o exercício: ")) - 1
+            if 0 <= selecao < len(exercicios_validos):
+                n = exercicios_validos[selecao]
+                dados.exercicios[n]  = input(f"Novo exercício ({dados.exercicios[n]}): ")  or dados.exercicios[n]
+                dados.tempos[n]      = input(f"Novo tempo ({dados.tempos[n]}): ")           or dados.tempos[n]
+                dados.distancias[n]  = input(f"Nova distância ({dados.distancias[n]}): ")  or dados.distancias[n]
+                dados.cargas[n]      = input(f"Nova carga ({dados.cargas[n]}): ")           or dados.cargas[n]
+                dados.repeticoes[n]  = input(f"Novas repetições ({dados.repeticoes[n]}): ") or dados.repeticoes[n]
+                salvar_dados()
+                print("\n✓ Exercício editado!")
+                input("Pressione Enter para continuar...")
+                break
+            else:
+                print("Número inválido.")
+        except ValueError:
+            print("Entrada inválida. Por favor, digite um NÚMERO.")
 
-    input("Pressione Enter para continuar...")
+        input("Pressione Enter para continuar...")
 
 
 def excluir_exercicio():
