@@ -3,6 +3,7 @@ import dados
 from treinos import menu_treinos
 from exercicios import menu_exercicios
 from competicoes import menu_competicoes
+from evolucoes import mostrar_evolucao
 
 dados.carregar_dados()
 
@@ -12,6 +13,7 @@ while True:
     print("1 - CRUD de Treinos")
     print("2 - Exercícios e Controle de Desempenho")
     print("3 - Planejamento de Competições")
+    print("4 - Acompanhamento de Evolução")
     print("0 - Sair")
     print()
     try:
@@ -31,6 +33,8 @@ while True:
         menu_exercicios()
     elif desejo == 3:
         menu_competicoes()
+    elif desejo == 4:
+        mostrar_evolucao()
     else:
         print("Opção inválida. Por favor, digite um NÚMERO.")
         input("Pressione Enter para continuar...")
