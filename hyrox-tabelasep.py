@@ -381,9 +381,11 @@ while True:
     elif desejo == 3:
         while True:
             os.system("cls")
-            print("===== EM CONSTRUÇÃO =====")
+            print("===== PAINEL DE COMPETIÇÕES =====")
             print("1 - Cadastrar Competição")
             print("2 - Visualizar Competição")
+            print("3 - Editar Competição")
+            print("4 - Excluir Competição")
             print("0 - Voltar")
             print()
             try:
@@ -470,6 +472,62 @@ while True:
                             )
                     print(sep)
                 input("\nPressione Enter para continuar...")
+
+            elif escolha3 == 3:
+                os.system("cls")
+                competicoes_validas = [i for i, e in enumerate(competicoes) if e]
+                if not competicoes_validas:
+                    print("Nenhuma competição cadastrado.")
+                    input("Pressione Enter...")
+                    continue
+                print("========== EDITAR COMPETIÇÕES ==========\n")
+                for idx, i in enumerate(competicoes_validas):
+                    print(f"{idx + 1} - {competicoes[i]}")
+                try:
+                    selecao_comp = int(input("\nEscolha a competição: ")) - 1
+                    if 0 <= selecao_comp < len(competicoes_validas):
+                        numero = competicoes_validas[selecao_comp]
+                        competicoes[numero] = (input(f"Nova competição ({competicoes[numero]}): ") or competicoes[numero])
+                        locais[numero] = (input(f"Novo local ({locais[numero]}): ") or locais[numero])
+                        datas[numero] = (input(f"Nova data ({datas[numero]}): ") or datas[numero])
+                        categorias[numero] = (input(f"Nova categoria ({categorias[numero]}): ") or categorias[numero])
+                        salvar_dados()
+                        print("\n✓ Competição editada!")
+                    else:
+                        print("Número inválido.")
+                except ValueError:
+                    print("Entrada inválida. Por favor, digite um NÚMERO.")
+                input("Pressione Enter para continuar...")
+            
+            elif escolha3 == 4:
+                os.system("cls")
+                competicoes_validas = [
+                    i for i, e in enumerate(competicoes) if e]
+                if not competicoes_validas:
+                    print("Nenhuma competição cadastrada.")
+                    input("Pressione Enter...")
+                    continue
+                print("========== EXCLUIR COMPETIÇÕES ==========\n")
+                for idx, i in enumerate(competicoes_validas):
+                    print(f"{idx + 1} - {competicoes[i]}")
+                try:
+                    selecao_comp = int(input("\nEscolha a competição: ")) - 1
+                    if 0 <= selecao_comp < len(competicoes_validas):
+                        numero = competicoes_validas[selecao_comp]
+                        competicoes[numero] = ""
+                        datas[numero] = ""
+                        locais[numero] = ""
+                        categorias[numero] = ""
+                        salvar_dados()
+                        print("\n✓ Competição excluída!")
+                    else:
+                        print("Número inválido.")
+                except ValueError:
+                    print("Entrada inválida. Por favor, digite um NÚMERO.")
+                input("Pressione Enter para continuar...")
+            else:
+                print("Opção inválida.")
+                input("Pressione Enter para continuar...")
 
     else:
         print("Opção inválida. Por favor, digite um NÚMERO.")
