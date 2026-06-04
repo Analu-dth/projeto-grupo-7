@@ -70,6 +70,17 @@ def salvar_dados():
         f.write(",".join(datas) + "\n")
         f.write(",".join(categorias) + "\n")
 
+def extrair_numero(texto):
+    numero = ""
+
+    for caractere in texto:
+        if caractere.isdigit() or caractere == ".":
+            numero += caractere
+
+    if numero:
+        return float(numero)
+
+    return None
 
 carregar_dados()
 
@@ -79,6 +90,7 @@ while True:
     print("1 - CRUD de Treinos")
     print("2 - Exercícios e Controle de Desempenho")
     print("3 - Planejamento de Competições")
+    print("4 - Acompanhamento de evolução")
     print("0 - Sair")
     print()
     try:
@@ -572,7 +584,91 @@ while True:
             else:
                 print("Opção inválida.")
                 input("Pressione Enter para continuar...")
+    elif desejo == 4:
+        os.system("cls")
+        print("===== ACOMPANHAMENTO DE EVOLUÇÃO =====\n")
 
+        # Frequência de treinos
+        total_treinos = len([t for t in treinos if t])
+
+        # Exercícios válidos
+        exercicios_validos = [
+            i for i, e in enumerate(exercicios)
+            if e and tempos[i] and cargas[i]
+        ]
+
+        print(f"Total de treinos cadastrados: {total_treinos}")
+
+        if not exercicios_validos:
+            print("\nNão há dados suficientes para análise de evolução.")
+            input("\nPressione Enter para continuar...")
+            continue
+
+        print("\n========== EVOLUÇÃO DOS EXERCÍCIOS ==========\n")
+
+        exercicios_unicos = list(set(
+            exercicios[i] for i in exercicios_validos
+        ))
+
+        for nome_exercicio in exercicios_unicos:
+
+            indices = [
+                i for i in exercicios_validos
+                if exercicios[i] == nome_exercicio
+            ]
+
+            if len(indices) < 2:
+                continue
+
+            primeiro = indices[0]
+            ultimo = indices[-1]
+
+            print(f"Exercício: {nome_exercicio}")
+
+            # Evolução de tempo
+            try:
+                tempo_inicial = extrair_numero(tempos[primeiro])
+                tempo_final = extrair_numero(tempos[ultimo])
+
+                if tempo_inicial is not None and tempo_final is not None:
+                    diferenca_tempo = tempo_inicial - tempo_final
+
+                if diferenca_tempo > 0:
+                    print(
+                        f"  ✓ Melhora de tempo: {diferenca_tempo:.2f}"
+                    )
+                elif diferenca_tempo < 0:
+                    print(
+                        f"  ⚠ Tempo aumentou em {-diferenca_tempo:.2f}"
+                    )
+                else:
+                    print("  Tempo mantido.")
+            except ValueError:
+                print("  Tempo não analisável.")
+
+            # Evolução de carga
+            try:
+                carga_inicial = extrair_numero(cargas[primeiro])
+                carga_final = extrair_numero(cargas[ultimo])
+                if carga_inicial is not None and carga_final is not None:
+                    diferenca_carga = carga_final - carga_inicial
+
+                if diferenca_carga > 0:
+                    print(
+                        f"  ✓ Aumento de carga: {diferenca_carga:.2f}"
+                    )
+                elif diferenca_carga < 0:
+                    print(
+                        f"  Carga reduziu em {-diferenca_carga:.2f}"
+                    )
+                else:
+                    print("  Carga mantida.")
+            except ValueError:
+                print("  Carga não analisável.")
+
+            print("-" * 40)
+
+        input("\nPressione Enter para continuar...")
     else:
         print("Opção inválida. Por favor, digite um NÚMERO.")
         input("Pressione Enter para continuar...")
