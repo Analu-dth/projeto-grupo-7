@@ -2,6 +2,6 @@ __pycache__/
 *.py[cod]
 *.pyo
 
-# Dados do projeto (não versionar informações pessoais)
 *.txt
 *.csv
+!arquivos/sugestoes.csv

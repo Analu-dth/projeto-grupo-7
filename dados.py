@@ -4,6 +4,9 @@ import csv
 ARQ_TREINOS      = "arquivos/treinos.csv"
 ARQ_EXERCICIOS   = "arquivos/exercicios.csv"
 ARQ_COMPETICOES  = "arquivos/competicoes.csv"
+ARQ_CALENDARIO   = "arquivos/calendario.csv"
+
+os.makedirs("arquivos", exist_ok=True)
 
 treinos      = []
 horarios     = []
@@ -21,11 +24,16 @@ locais       = []
 datas        = []
 categorias   = []
 
+datas_calendario = []
+pesos            = []
+alturas          = []
+treinos_dia      = []
 
 def carregar_dados():
     global treinos, horarios, duracoes, intensidades
     global exercicios, tempos, distancias, cargas, repeticoes
     global competicoes, locais, datas, categorias
+    global datas_calendario, pesos, alturas, treinos_dia
 
     # ---- TREINOS ----
     if os.path.exists(ARQ_TREINOS):
@@ -63,6 +71,18 @@ def carregar_dados():
                 categorias.append(row.get("categoria", ""))
     else:
         print("Arquivo de competições não encontrado. Iniciando vazio.")
+
+    # ---- CALENDÁRIO ----
+    if os.path.exists(ARQ_CALENDARIO):
+        with open(ARQ_CALENDARIO, newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                datas_calendario.append(row.get("data", ""))
+                pesos.append(row.get("peso", ""))
+                alturas.append(row.get("altura", ""))
+                treinos_dia.append(row.get("treino", ""))
+    else:
+        print("Arquivo de calendário não encontrado. Iniciando vazio.")
 
 
 def salvar_dados():
@@ -110,4 +130,18 @@ def salvar_dados():
                 "data":       datas[i],
                 "local":      locais[i],
                 "categoria":  categorias[i],
+            })
+    # ---- CALENDÁRIO ----
+    with open(ARQ_CALENDARIO, "w", newline="", encoding="utf-8") as f:
+        campos = ["data", "peso", "altura", "treino"]
+        writer = csv.DictWriter(f, fieldnames=campos)
+        writer.writeheader()
+        for i in range(len(datas_calendario)):
+            if not datas_calendario[i]:
+                continue
+            writer.writerow({
+                "data":   datas_calendario[i],
+                "peso":   pesos[i],
+                "altura": alturas[i],
+                "treino": treinos_dia[i],
             })

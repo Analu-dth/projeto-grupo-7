@@ -6,6 +6,7 @@ from menus.competicoes import menu_competicoes
 from menus.evolucoes import mostrar_evolucao
 from menus.sugestoes import menu_sugestoes
 from menus.extra import menu_extra
+from menus.segredo import menu_segredo
 
 dados.carregar_dados()
 
@@ -17,12 +18,19 @@ while True:
     print("3 - Planejamento de Competições")
     print("4 - Acompanhamento de Evolução")
     print("5 - Sugestões de Treinamento")
-    print("6- Função Extra")
+    print("6 - Função Extra")
     print("0 - Sair")
+    print("CS")
     print()
+
+    entrada = input("Selecione a opção desejada: ").strip()
+
+    if entrada == "CS":
+        menu_segredo()
+        continue
+
     try:
-        desejo = int(input("Selecione a opção desejada: "))
-    
+        desejo = int(entrada)
     except ValueError:
         print("Entrada inválida. Por favor, digite um NÚMERO.")
         input("Pressione Enter para continuar...")
@@ -45,6 +53,5 @@ while True:
     elif desejo == 6:
         menu_extra()
     else:
-        print("Opção inválida. Por favor, digite um número das Opções Disponiveis.")
+        print("Opção inválida. Por favor, digite um número das Opções Disponíveis.")
         input("Pressione Enter para continuar...")
-    

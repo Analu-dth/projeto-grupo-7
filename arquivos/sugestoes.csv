@@ -1,0 +1,10 @@
+nivel,nome_treino,descricao,dias_semana,foco,duracao_minutos,intensidade
+iniciante,Base HYROX Leve,"Corrida leve alternada com caminhadas e blocos curtos de exercícios (sled leve, wall balls leves).",3,"Condicionamento geral e técnica",30-40,Baixa
+iniciante,Força Fundamental,"Exercícios básicos com peso do corpo (agachamento, flexão inclinada, prancha) e introdução leve a farmer's carry.",2,"Força geral e estabilidade",30-40,Baixa a moderada
+iniciante,Estacoes Técnicas HYROX,"Aprender o gesto técnico de sled push/pull, wall balls e burpee broad jumps com pouca carga e poucas repetições.",1,"Técnica e coordenação",20-30,Baixa
+intermediario,HYROX Parcial,"Blocos de 3–4 estações (ex: corrida + sled push + wall balls) com controle de tempo e descanso moderado.",3,"Específico HYROX e capacidade de trabalho",40-50,Moderada
+intermediario,Força HYROX,"Sled push/pull moderado, farmer's carry e exercícios complementares (agachamento, remada) em séries estruturadas.",2,"Força e resistência muscular",40-50,Moderada a alta
+intermediario,Recovery Ativo,"Corrida leve ou bike + mobilidade + técnica suave das estações, sem foco em tempo.",1,"Recuperação e técnica",30-40,Baixa
+avancado,Simulado HYROX,"Sequência longa com várias estações na ordem próxima da prova, controlando pacing e tempos-alvo.",2,"Performance específica de prova",50-70,Alta
+avancado,Força Pesada HYROX,"Sled push/pull pesado, farmer's carry pesado, wall balls com carga alta, foco em poucas repetições e alta qualidade.",2,"Força máxima e potência",40-60,Alta
+avancado,Intervalos de Estacoes,"Séries intensas e curtas de uma ou duas estações (ex: sled + corrida curta) com descanso controlado.",1-2,"Velocidade e tolerância ao esforço",30-45,Alta

@@ -34,6 +34,7 @@ def menu_competicoes():
         else:
             print("Opção inválida.")
             input("Pressione Enter para continuar...")
+            continue
 
 
 def cadastrar_competicao():

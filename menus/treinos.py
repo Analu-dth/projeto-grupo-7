@@ -36,7 +36,6 @@ def menu_treinos():
 
 
 def adicionar_treino():
-    while True:
         os.system("cls")
 
         treino     = input("Digite o nome do treino: ")
