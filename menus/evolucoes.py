@@ -7,14 +7,17 @@ from dados import tempos
 from dados import cargas
 
 def extrair_numero(texto):
-    numero = ""
-
+    numero_str = ""
     for caractere in texto:
         if caractere.isdigit() or caractere == ".":
-            numero += caractere
-
-    if numero:
-        return float(numero)
+            numero_str += caractere
+    if numero_str:
+        try:
+            return float(numero_str)
+        except ValueError:
+            print(f"Aviso: Não foi possível converter '{numero_str}' para float.")
+            return None
+    return None
 
 def mostrar_evolucao():
         os.system("cls")
@@ -40,59 +43,51 @@ def mostrar_evolucao():
             ))
     
             for nome_exercicio in exercicios_unicos:
-    
                 indices = [
                     i for i in exercicios_validos
                     if exercicios[i] == nome_exercicio
                 ]
-    
                 if len(indices) < 2:
-                    return
+                    print(f"  Não há dados suficientes para analisar a evolução de '{nome_exercicio}'.")
+                    continue
     
                 primeiro = indices[0]
                 ultimo = indices[-1]
     
                 print(f"Exercício: {nome_exercicio}")
-    
-                try:
-                    tempo_inicial = extrair_numero(tempos[primeiro])
-                    tempo_final = extrair_numero(tempos[ultimo])
-    
-                    if tempo_inicial is not None and tempo_final is not None:
-                        diferenca_tempo = tempo_inicial - tempo_final
-    
+
+            try:
+                tempo_inicial = extrair_numero(tempos[primeiro])
+                tempo_final = extrair_numero(tempos[ultimo])
+                if tempo_inicial is not None and tempo_final is not None:
+                    diferenca_tempo = tempo_inicial - tempo_final
                     if diferenca_tempo > 0:
-                        print(
-                            f"  ✓ Melhora de tempo: {diferenca_tempo:.2f}"
-                        )
+                        print(f"  ✓ Melhora de tempo: {diferenca_tempo:.2f}")
                     elif diferenca_tempo < 0:
-                        print(
-                            f"  ⚠ Tempo aumentou em {-diferenca_tempo:.2f}"
-                        )
+                        print(f"  ⚠️ Tempo aumentou em {-diferenca_tempo:.2f}")
                     else:
                         print("  Tempo mantido.")
-                except ValueError:
-                    print("  Tempo não analisável.")
-    
-                try:
-                    carga_inicial = extrair_numero(cargas[primeiro])
-                    carga_final = extrair_numero(cargas[ultimo])
-                    if carga_inicial is not None and carga_final is not None:
-                        diferenca_carga = carga_final - carga_inicial
-    
+                else:
+                    print("  Tempo não analisável (dados inválidos).")
+            except Exception as e:
+                print(f"  Erro ao analisar tempo: {e}")
+
+            try:
+                carga_inicial = extrair_numero(cargas[primeiro])
+                carga_final = extrair_numero(cargas[ultimo])
+                if carga_inicial is not None and carga_final is not None:
+                    diferenca_carga = carga_final - carga_inicial
                     if diferenca_carga > 0:
-                        print(
-                            f"  ✓ Aumento de carga: {diferenca_carga:.2f}"
-                        )
+                        print(f"  ✓ Aumento de carga: {diferenca_carga:.2f}")
                     elif diferenca_carga < 0:
-                        print(
-                            f"  Carga reduziu em {-diferenca_carga:.2f}"
-                        )
+                        print(f"  Carga reduziu em {-diferenca_carga:.2f}")
                     else:
                         print("  Carga mantida.")
-                except ValueError:
-                    print("  Carga não analisável.")
+                else:
+                    print("  Carga não analisável (dados inválidos).")
+            except Exception as e:
+                print(f"  Erro ao analisar carga: {e}")
     
-                print("-" * 40)
+            print("-" * 40)
 
             input("\nPressione Enter para continuar...")
