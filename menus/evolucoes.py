@@ -13,7 +13,6 @@ def extrair_numero(texto):
         return float(numero)
 
 def mostrar_evolucao():
-    elif desejo == 4:
         os.system("cls")
         print("===== ACOMPANHAMENTO DE EVOLUÇÃO =====\n")
 
@@ -28,7 +27,7 @@ def mostrar_evolucao():
         if not exercicios_validos:
             print("\nNão há dados suficientes para análise de evolução.")
             input("\nPressione Enter para continuar...")
-            continue
+            return
         else:
             print("\n========== EVOLUÇÃO DOS EXERCÍCIOS ==========\n")
     
@@ -44,7 +43,7 @@ def mostrar_evolucao():
                 ]
     
                 if len(indices) < 2:
-                    continue
+                    return
     
                 primeiro = indices[0]
                 ultimo = indices[-1]
