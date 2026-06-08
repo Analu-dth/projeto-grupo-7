@@ -1,6 +1,10 @@
 # evolucao.py
 import os
 import dados
+from dados import treinos
+from dados import exercicios
+from dados import tempos
+from dados import cargas
 
 def extrair_numero(texto):
     numero = ""
