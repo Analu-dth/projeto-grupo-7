@@ -6,9 +6,12 @@ Um aplicativo em Python para gerenciar e organizar treinos de HYROX de forma sim
 
 O HYROX Planner é um programa de linha de comando que permite:
 - ✅ Adicionar, visualizar, editar e excluir treinos padrão
-- 🏋️ Gerenciar exercícios específicos do HYROX com controle de desempenho
-- 🏁 Planejar, editar e excluir competições com contagem regressiva
-- 📊 Visualizar dados em tabelas formatadas
+- ✅ Gerenciar exercícios específicos do HYROX com controle de desempenho
+- ✅ Planejar, editar e excluir competições com contagem regressiva
+- ✅ Acompanhar evolução e progresso dos treinos
+- ✅ Receber sugestões personalizadas de treinamento por nível
+- ✅ Visualizar dados em tabelas formatadas
+- ✅ Planejar semana de treinos com acompanhamento de RPE e humor
 
 ## 🚀 Funcionalidades
 
@@ -38,14 +41,26 @@ Funcionalidades:
 - **Editar Competição**: Modifique nome, data, local e categoria
 - **Excluir Competição**: Remova competições do sistema
 
-### 4. Acompanhamento de Evolução
-- ⚙️ **Em Construção**: Funcionalidade para acompanhar progressos ao longo do tempo
+### 4. Acompanhamento de Evolução ✅
+- **Análise de Progresso**: Visualize melhorias de tempo e aumento de carga nos exercícios
+- **Comparação**: Acompanhe a evolução entre o primeiro e último registro de cada exercício
+- **Indicadores de Desempenho**: Melhoras, estabilidade ou redução de desempenho
 
-### 5. Sugestões de Treinamento
-- ⚙️ **Em Construção**: Recomendações personalizadas para otimizar seus treinos
+### 5. Sugestões de Treinamento ✅
+- **Três Níveis**: Iniciante, Intermediário e Avançado
+- **Treinos Personalizados**: Recomendações específicas para cada nível com:
+  - Nome do treino
+  - Descrição detalhada
+  - Dias por semana
+  - Foco do treinamento
+  - Duração em minutos
+  - Nível de intensidade
 
-### 6. Funções Extras
-- ⚙️ **Em Construção**: Recursos adicionais para complementar sua experiência
+### 6. Planejador Semanal de Treinos ✅
+- **Configurar Dias**: Defina treinos para cada dia da semana
+- **Registro de Dados**: Anote data, treino realizado, RPE (1-10), humor e observações
+- **Visualizar Semana**: Tabela formatada com todos os dados da semana
+- **Editar Dias**: Modifique qualquer dia já configurado
 
 ## 📁 Estrutura do Projeto
 
@@ -55,18 +70,21 @@ projeto-grupo-7/
 ├── dados.py               # Gerenciamento de dados e persistência em CSV
 ├── README.md              # Esta documentação
 ├── .gitignore             # Configuração do Git
-├── ORIGINAIS/             # Arquivos originais (backup)
+├── ORIGINAIS - ESQUEÇAM/  # Arquivos originais (backup)
 ├── menus/                 # Módulos de menu
 │   ├── treinos.py         # Menu e funções de CRUD de treinos
 │   ├── exercicios.py      # Menu e funções de gerenciamento de exercícios
 │   ├── competicoes.py     # Menu e funções de planejamento de competições
-│   ├── evolucoes.py       # Funções de acompanhamento de evolução (em construção)
-│   ├── sugestoes.py       # Menu de sugestões de treinamento (em construção)
-│   └── extra.py           # Funções extras (em construção)
+│   ├── evolucoes.py       # Funções de acompanhamento de evolução ✅
+│   ├── sugestoes.py       # Menu de sugestões de treinamento ✅
+│   ├── extra.py           # Planejador semanal de treinos ✅
+│   └── segredo.py         # Menu secreto com funcionalidades adicionais
 └── arquivos/              # Armazenamento de dados
     ├── treinos.csv        # Dados de treinos
     ├── exercicios.csv     # Dados de exercícios
-    └── competicoes.csv    # Dados de competições
+    ├── competicoes.csv    # Dados de competições
+    ├── calendario.csv     # Dados do calendário semanal
+    └── sugestoes.csv      # Dados de sugestões personalizadas
 ```
 
 ## 💾 Armazenamento de Dados
@@ -75,6 +93,8 @@ Os dados são salvos automaticamente em arquivos CSV no diretório `arquivos/`:
 - **treinos.csv**: Treinos (nome, horário, duração, intensidade)
 - **exercicios.csv**: Exercícios (nome, tempo, distância, carga, repetições)
 - **competicoes.csv**: Competições (nome, data, local, categoria)
+- **calendario.csv**: Dados semanais (data, peso, altura, treino)
+- **sugestoes.csv**: Sugestões personalizadas por nível
 
 Formato: Cada arquivo utiliza CSV com headers para fácil leitura e manutenção.
 
@@ -84,7 +104,7 @@ Formato: Cada arquivo utiliza CSV com headers para fácil leitura e manutenção
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/Analu-dth/projeto-grupo-7.git
+   git clone https://github.com/analu-dev/projeto-grupo-7.git
    cd projeto-grupo-7
    ```
 
@@ -99,13 +119,14 @@ Formato: Cada arquivo utiliza CSV com headers para fácil leitura e manutenção
    ```
 
 ### Menu Principal
-O programa oferece 6 opções principais:
+O programa oferece 7 opções principais:
 - `1` - CRUD de Treinos
 - `2` - Exercícios e Controle de Desempenho
 - `3` - Planejamento de Competições
-- `4` - Acompanhamento de Evolução *(em construção)*
-- `5` - Sugestões de Treinamento *(em construção)*
-- `6` - Função Extra *(em construção)*
+- `4` - Acompanhamento de Evolução ✅
+- `5` - Sugestões de Treinamento ✅
+- `6` - Planejador Semanal ✅
+- `CS` - Menu Secreto (funcionalidades ocultas)
 - `0` - Sair
 
 ### Menu de Treinos (opção 1)
@@ -129,6 +150,23 @@ O programa oferece 6 opções principais:
 - `4` - Excluir Competição
 - `0` - Voltar
 
+### Acompanhamento de Evolução (opção 4)
+- Visualização automática de progresso em tempo e carga
+- Comparação entre registros iniciais e finais
+- Indicadores de melhora, estabilidade ou redução
+
+### Sugestões de Treinamento (opção 5)
+- `1` - Treinos para Iniciantes
+- `2` - Treinos para Intermediários
+- `3` - Treinos para Avançados
+- Visualização de detalhes completos de cada sugestão
+
+### Planejador Semanal (opção 6)
+- `1` - Configurar um dia da semana
+- `2` - Visualizar tabela semanal completa
+- `3` - Editar um dia já configurado
+- `0` - Voltar
+
 ## 📝 Requisitos
 
 - Python 3.x
@@ -139,6 +177,9 @@ O programa oferece 6 opções principais:
 - **Treino Padrão**: Corrida matinal com 45 minutos de duração, intensidade moderada
 - **Exercício Específico**: Sled Push com 80kg, 100m de distância, 30 repetições
 - **Competição**: HYROX São Paulo no dia 15/06/2024, categoria Elite
+- **Evolução**: Acompanhe sua melhora do Sled Push de 15s inicialmente para 12s
+- **Sugestão**: Treinamento intermediário com foco em resistência muscular
+- **Planejamento Semanal**: Configure sua semana com RPE e humor diário
 
 ## ⚠️ Notas Técnicas
 
@@ -148,6 +189,8 @@ O programa oferece 6 opções principais:
 - Tratamento de erros para entradas inválidas
 - Dados persistidos em CSV para fácil portabilidade
 - Competições possuem contagem regressiva automática de dias até a data do evento
+- Sistema de análise de evolução com extração de números de valores registrados
+- Menu secreto acessível digitando "CS" no menu principal
 
 ## 👥 Contribuidores
 
