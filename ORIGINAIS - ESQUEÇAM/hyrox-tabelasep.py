@@ -49,7 +49,7 @@ def carregar_dados():
             else:
                 print("Arquivo incompleto. Iniciando listas vazias.")
     else:
-        print("Arquivo não encontrado. Iniciando listas vazias.")
+        print("O arquivo não foi encontrado. Iniciando listas vazias.")
 
 
 def salvar_dados():
